@@ -67,6 +67,7 @@ export const HomePage = () => {
           Have questions or need support? Feel free to reach out to our support
           team.
         </p>
+        <address>phonebook@ukr.net</address>
       </div>
     </div>
   );

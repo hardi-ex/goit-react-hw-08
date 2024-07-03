@@ -21,10 +21,10 @@ import ContactPage from "../pages/ContactsPage";
 
 const App = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const filteredContacts = useSelector(selectFilteredContacts);
-  const isError = useSelector(selectError);
-  const isLoading = useSelector(selectIsLoading);
+  // const contacts = useSelector(selectContacts);
+  // const filteredContacts = useSelector(selectFilteredContacts);
+  // const isError = useSelector(selectError);
+  // const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -34,10 +34,10 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegistrationPage />} />
+        <Route path="/contacts" element={<ContactPage />} />
       </Route>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegistrationPage />} />
-      <Route path="/contacts" element={<ContactPage />} />
     </Routes>
 
     // <>
