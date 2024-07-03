@@ -3,8 +3,11 @@ import css from "./Header.module.css";
 import icon from "../../../public/icon.svg";
 import { useSelector } from "react-redux";
 import { selectIsLoggedIn, selectUser } from "../../redux/auth/slice";
+import { useDispatch } from "react-redux";
+import { logoutThunk } from "../../redux/auth/operations";
 
 export const Header = () => {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
 
@@ -43,7 +46,12 @@ export const Header = () => {
         )}
         {isLoggedIn && (
           <>
-            <button className={css.button}>Logout</button>
+            <button
+              onClick={() => dispatch(logoutThunk())}
+              className={css.button}
+            >
+              Logout
+            </button>
           </>
         )}
       </ul>
