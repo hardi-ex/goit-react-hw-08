@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  position: relative;
 }
 
 .container {
@@ -70,4 +71,10 @@
 
 .link {
   text-decoration: underline;
+}
+
+.arrow {
+  position: absolute;
+  top: 50px;
+  left: 50px;
 }

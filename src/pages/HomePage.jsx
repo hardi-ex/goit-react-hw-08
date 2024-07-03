@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import css from "./HomePage.module.css";
 import contact from "/contact.svg";
 import security from "/security.svg";
@@ -6,7 +7,6 @@ import tag from "/tag.svg";
 export const HomePage = () => {
   return (
     <div className={css.div}>
-      <h1>Phonebook</h1>
       <div className={css.mainDivs}>
         <div className={css.securityDiv}>
           <img src={security} alt="security" width="40" height="40" />
@@ -52,9 +52,15 @@ export const HomePage = () => {
           <h2>Get Started</h2>
         </div>
         <p>
-          Create an account or log in to manage your contacts seamlessly. Join
-          thousands of users who trust Phonebook for their contact management
-          needs.
+          <Link className={css.link} to="/register">
+            Create
+          </Link>{" "}
+          an account or{" "}
+          <Link className={css.link} to="/login">
+            log in
+          </Link>{" "}
+          to manage your contacts seamlessly. Join thousands of users who trust
+          Phonebook for their contact management needs.
         </p>
       </div>
 

@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 70px;
+  gap: 35px;
   height: 800px;
   color: white;
 }
@@ -21,11 +21,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 25px;
-}
-
-.div h1 {
-  font-size: 60px;
+  gap: 36px;
 }
 
 .div h2 {
@@ -36,10 +32,14 @@
   list-style-type: disc;
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
 
 .div p {
   font-size: 18px;
   text-decoration: dashed;
+}
+
+.link {
+  text-decoration: underline;
 }

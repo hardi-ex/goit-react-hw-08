@@ -3,13 +3,12 @@ import { Link } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { loginThunk } from "../../redux/auth/operations";
+import arrow from "/arrow.svg";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    console.log(values);
-
     dispatch(loginThunk(values));
   };
   const initialValues = {
@@ -19,6 +18,9 @@ export const LoginForm = () => {
 
   return (
     <div className={css.div}>
+      <Link className={css.arrow} to="/">
+        <img src={arrow} alt="arrow" width="50" height="50" />
+      </Link>
       <div className={css.container}>
         <h2 className={css.title}>Login</h2>
         <Formik initialValues={initialValues} onSubmit={handleSubmit}>
