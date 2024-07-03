@@ -1,8 +1,12 @@
+#root {
+  min-height: 100vh;
+  min-width: 700px;
+}
+
 body {
   font-family: "Mulish", sans-serif;
   font-weight: 400;
-  display: flex;
-  justify-content: center;
+  background-color: #23164b;
 }
 
 h1,
@@ -13,13 +17,6 @@ h5,
 h6,
 p {
   margin: 0;
-}
-
-h1 {
-  margin-top: 20px;
-  text-align: center;
-  font-weight: 800;
-  color: rgb(26, 31, 69);
 }
 
 ul,

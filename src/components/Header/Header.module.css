@@ -1,0 +1,40 @@
+.header {
+  background-color: #110731;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.logoDiv {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header h1 {
+  text-align: center;
+  font-weight: 800;
+  color: white;
+  pointer-events: none;
+}
+
+.header ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.link {
+  color: white;
+  font-weight: 700;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  &:hover {
+    color: rgb(255, 255, 255, 0.6);
+  }
+}
