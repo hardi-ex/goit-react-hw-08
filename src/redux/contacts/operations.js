@@ -55,7 +55,7 @@ export const addContact = createAsyncThunk(
   async (contact, thunkAPI) => {
     try {
       const { data } = await goItApi.post("/contacts", contact);
-      showSuccessToast("Successfully added!");
+      showSuccessToast("Successfully added");
       return data;
     } catch (error) {
       showErrorToast("Something went wrong...");
@@ -67,7 +67,7 @@ export const addContact = createAsyncThunk(
 export const deleteContact = createAsyncThunk("id", async (id, thunkAPI) => {
   try {
     const { data } = await goItApi.delete(`/contacts/${id}`);
-    showSuccessToast("Successfully deleted!");
+    showSuccessToast("Successfully deleted");
     return data.id;
   } catch (error) {
     showErrorToast("Something went wrong...");

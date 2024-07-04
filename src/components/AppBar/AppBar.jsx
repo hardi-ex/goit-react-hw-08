@@ -1,18 +1,14 @@
-import { NavLink } from "react-router-dom";
 import css from "./AppBar.module.css";
 import icon from "../../../public/icon.svg";
-import person from "../../../public/person.svg";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
-import { useDispatch } from "react-redux";
-import { logout } from "../../redux/auth/operations";
-import clsx from "clsx";
-
-const buildNavClass = ({ isActive }) =>
-  clsx(css.navLink, { [css.active]: isActive });
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { AuthNav } from "../AuthNav/AuthNav";
+import { UserMenu } from "../UserMenu/UserMenu";
+import { Navigation } from "../Navigation/Navigation";
+import { selectUser } from "../../redux/auth/selectors";
+import person from "../../../public/person.svg";
 
 export const AppBar = () => {
-  const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
 
@@ -28,40 +24,12 @@ export const AppBar = () => {
           <h2 className={css.h2}>{user.name}</h2>
         </div>
       )}
-      <ul>
-        <li>
-          <NavLink className={buildNavClass} to="/">
-            Home
-          </NavLink>
-        </li>
-
-        {!isLoggedIn && (
-          <>
-            <li>
-              <NavLink className={buildNavClass} to="/register">
-                Register
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className={buildNavClass} to="/login">
-                Login
-              </NavLink>
-            </li>
-          </>
-        )}
-        {isLoggedIn && (
-          <>
-            <li>
-              <NavLink className={buildNavClass} to="/contacts">
-                Contacts
-              </NavLink>
-            </li>
-            <button onClick={() => dispatch(logout())} className={css.button}>
-              Logout
-            </button>
-          </>
-        )}
-      </ul>
+      <nav>
+        <ul>
+          <Navigation />
+          {!isLoggedIn ? <AuthNav /> : <UserMenu />}
+        </ul>
+      </nav>
     </header>
   );
 };

@@ -1,19 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, lazy } from "react";
 import { useDispatch } from "react-redux";
-import { fetchContacts } from "../redux/contacts/operations";
 import { Route, Routes } from "react-router-dom";
+
 import Layout from "./Layout/Layout";
-import HomePage from "../pages/HomePage";
-import LoginPage from "../pages/LoginPage";
-import RegistrationPage from "../pages/RegistrationPage";
-import ContactPage from "../pages/ContactsPage";
 import PrivateRoute from "../routes/PrivateRoute";
 import RestrictedRoute from "../routes/RestrictedRoute";
+
+const HomePage = lazy(() => import("../pages/HomePage"));
+const ContactPage = lazy(() => import("../pages/ContactsPage"));
+const LoginPage = lazy(() => import("../pages/LoginPage"));
+const RegistrationPage = lazy(() => import("../pages/RegistrationPage"));
+
 import { refreshUser } from "../redux/auth/operations";
 import { selectIsRefresh } from "../redux/auth/selectors";
 import { useSelector } from "react-redux";
 import css from "./App.module.css";
 import { ThreeDots } from "react-loader-spinner";
+import { Suspense } from "react";
 
 const App = () => {
   const isRefresh = useSelector(selectIsRefresh);
@@ -21,10 +24,6 @@ const App = () => {
 
   useEffect(() => {
     dispatch(refreshUser());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(fetchContacts());
   }, [dispatch]);
 
   return isRefresh ? (
@@ -41,35 +40,37 @@ const App = () => {
       />
     </div>
   ) : (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<HomePage />} />
+    <Suspense fallback={null}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route
+            path="/contacts"
+            element={
+              <PrivateRoute>
+                <ContactPage />
+              </PrivateRoute>
+            }
+          />
+        </Route>
         <Route
-          path="/contacts"
+          path="/login"
           element={
-            <PrivateRoute>
-              <ContactPage />
-            </PrivateRoute>
+            <RestrictedRoute>
+              <LoginPage />
+            </RestrictedRoute>
           }
         />
-      </Route>
-      <Route
-        path="/login"
-        element={
-          <RestrictedRoute>
-            <LoginPage />
-          </RestrictedRoute>
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <RestrictedRoute>
-            <RegistrationPage />
-          </RestrictedRoute>
-        }
-      />
-    </Routes>
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute>
+              <RegistrationPage />
+            </RestrictedRoute>
+          }
+        />
+      </Routes>
+    </Suspense>
   );
 };
 
