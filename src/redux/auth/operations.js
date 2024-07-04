@@ -1,5 +1,24 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { clearToken, goItApi, setToken } from "../../config/goItApi";
+import { Howl } from "howler";
+import "react-toastify/dist/ReactToastify.css";
+import { showToast } from "../contacts/operations";
+
+const successAuthSound = new Howl({
+  src: ["/public/sounds/authError.mp3"],
+});
+
+const errorAuthSound = new Howl({
+  src: ["/public/sounds/authSuccess.mp3"],
+});
+
+const logoutSound = new Howl({
+  src: ["/public/sounds/logout.mp3"],
+});
+
+const showErrorToast = (message) => {
+  showToast(message, "error", errorAuthSound);
+};
 
 export const register = createAsyncThunk(
   "auth/register",
@@ -7,8 +26,10 @@ export const register = createAsyncThunk(
     try {
       const { data } = await goItApi.post("/users/signup", credentials);
       setToken(data.token);
+      successAuthSound.play();
       return data;
     } catch (error) {
+      showErrorToast("Something went wrong..");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -20,8 +41,10 @@ export const login = createAsyncThunk(
     try {
       const { data } = await goItApi.post("/users/login", credentials);
       setToken(data.token);
+      successAuthSound.play();
       return data;
     } catch (error) {
+      showErrorToast("Something went wrong..");
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -31,6 +54,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await goItApi.post("/users/logout");
     clearToken();
+    logoutSound.play();
   } catch (error) {
     thunkAPI.rejectWithValue(error.message);
   }

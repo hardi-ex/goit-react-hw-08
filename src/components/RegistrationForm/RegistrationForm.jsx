@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 import arrow from "/arrow.svg";
+import { ToastContainer } from "react-toastify";
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -68,6 +69,7 @@ export const RegistrationForm = () => {
             </button>
           </Form>
         </Formik>
+        <ToastContainer />
       </div>
     </div>
   );

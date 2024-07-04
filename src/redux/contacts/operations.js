@@ -3,39 +3,43 @@ import { goItApi } from "../../config/goItApi";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Howl } from "howler";
 
-const showSuccessToast = (message) => {
-  toast.success(message, {
+const successSound = new Howl({
+  src: ["/sounds/success.mp3"],
+});
+
+const errorSound = new Howl({
+  src: ["/sounds/error.mp3"],
+});
+
+const toastStyle = {
+  width: "auto",
+  maxWidth: "250px",
+  textAlign: "center",
+  borderRadius: "10px",
+  padding: "10px",
+  backgroundColor: "#FFFFFF",
+  marginTop: "100px",
+  marginLeft: "60px",
+};
+
+export const showToast = (message, type, sound) => {
+  toast[type](message, {
     autoClose: 1500,
-    style: {
-      width: "auto",
-      maxWidth: "230px",
-      textAlign: "center",
-      borderRadius: "10px",
-      padding: "10px",
-      backgroundColor: "#FFFFFF",
-      color: "#110731",
-      marginTop: "100px",
-      marginLeft: "60px",
+    style: toastStyle,
+    onOpen: () => {
+      sound.play();
     },
   });
 };
 
+const showSuccessToast = (message) => {
+  showToast(message, "success", successSound);
+};
+
 const showErrorToast = (message) => {
-  toast.error(message, {
-    autoClose: 15000000000000000,
-    style: {
-      width: "auto",
-      maxWidth: "250px",
-      textAlign: "center",
-      borderRadius: "10px",
-      padding: "10px",
-      backgroundColor: "#FFFFFF",
-      color: "#FF6347",
-      marginTop: "100px",
-      marginLeft: "60px",
-    },
-  });
+  showToast(message, "error", errorSound);
 };
 
 export const fetchContacts = createAsyncThunk(

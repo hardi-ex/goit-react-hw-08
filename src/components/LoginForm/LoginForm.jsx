@@ -4,6 +4,7 @@ import { Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/auth/operations";
 import arrow from "/arrow.svg";
+import { ToastContainer } from "react-toastify";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ export const LoginForm = () => {
             </button>
           </Form>
         </Formik>
+        <ToastContainer />
       </div>
     </div>
   );
