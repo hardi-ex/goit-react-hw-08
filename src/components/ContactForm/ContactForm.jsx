@@ -5,6 +5,7 @@ import { ErrorMessage } from "formik";
 import css from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
+import { ToastContainer } from "react-toastify";
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,6 @@ export const ContactForm = () => {
     });
 
     dispatch(action);
-
     actions.resetForm();
   };
 
@@ -87,6 +87,7 @@ export const ContactForm = () => {
           </button>
         </Form>
       </Formik>
+      <ToastContainer />
     </>
   );
 };

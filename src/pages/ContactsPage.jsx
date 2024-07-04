@@ -1,5 +1,5 @@
 import {
-  selectContacts,
+  selectContactsItems,
   selectError,
   selectIsLoading,
 } from "../redux/contacts/selectors";
@@ -15,8 +15,8 @@ import { fetchContacts } from "../redux/contacts/operations";
 
 export const ContactsPage = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts) || [];
-  const filteredContacts = useSelector(selectFilteredContacts) || [];
+  const contacts = useSelector(selectContactsItems);
+  const filteredContacts = useSelector(selectFilteredContacts);
   const isError = useSelector(selectError);
   const isLoading = useSelector(selectIsLoading);
 

@@ -4,8 +4,8 @@ import {
   addContact,
   deleteContact,
 } from "../contacts/operations";
-import { selectNameFilter } from "../filters/selectors";
-import { selectContacts } from "./selectors";
+import { selectFilter } from "../filters/selectors";
+import { selectContactsItems } from "./selectors";
 
 const initialState = {
   contacts: {
@@ -57,14 +57,16 @@ const slice = createSlice({
 export const contactReducer = slice.reducer;
 
 export const selectFilteredContacts = createSelector(
-  [selectContacts, selectNameFilter],
+  [selectContactsItems, selectFilter],
   (contacts, filter) => {
-    if (!filter) {
+    if (typeof filter !== "string") {
       return contacts;
-    } else {
-      return contacts.filter((contact) =>
-        contact.name.toLowerCase().includes(filter.toLowerCase())
-      );
     }
+    if (!filter) return contacts;
+    return contacts.filter(
+      (contact) =>
+        contact.name.toLowerCase().includes(filter.toLowerCase()) ||
+        contact.number.toLowerCase().includes(filter.toLowerCase())
+    );
   }
 );
