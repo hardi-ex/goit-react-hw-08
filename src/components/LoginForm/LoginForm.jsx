@@ -2,14 +2,14 @@ import css from "./LoginForm.module.css";
 import { Link } from "react-router-dom";
 import { Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { loginThunk } from "../../redux/auth/operations";
+import { login } from "../../redux/auth/operations";
 import arrow from "/arrow.svg";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    dispatch(loginThunk(values));
+    dispatch(login(values));
   };
   const initialValues = {
     email: "",

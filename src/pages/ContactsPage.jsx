@@ -2,8 +2,8 @@ import {
   selectContacts,
   selectError,
   selectIsLoading,
-} from "../redux/contactsSlice";
-import { selectFilteredContacts } from "../redux/contactsSlice";
+} from "../redux/contacts/selectors";
+import { selectFilteredContacts } from "../redux/contacts/slice";
 import { ThreeDots } from "react-loader-spinner";
 import css from "../components/App.module.css";
 import ContactList from "../components/ContactList/ContactList";
@@ -11,18 +11,19 @@ import SearchBox from "../components/SearchBox/SearchBox";
 import ContactForm from "../components/ContactForm/ContactForm";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchContacts } from "../redux/contactsOps";
+import { fetchContacts } from "../redux/contacts/operations";
 
 export const ContactsPage = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const filteredContacts = useSelector(selectFilteredContacts);
+  const contacts = useSelector(selectContacts) || [];
+  const filteredContacts = useSelector(selectFilteredContacts) || [];
   const isError = useSelector(selectError);
   const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
+
   return (
     <>
       <ContactForm />
@@ -53,4 +54,5 @@ export const ContactsPage = () => {
     </>
   );
 };
+
 export default ContactsPage;

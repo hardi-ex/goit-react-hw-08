@@ -1,17 +1,17 @@
 import { NavLink } from "react-router-dom";
-import css from "./Header.module.css";
+import css from "./AppBar.module.css";
 import icon from "../../../public/icon.svg";
 import person from "../../../public/person.svg";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn, selectUser } from "../../redux/auth/slice";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 import { useDispatch } from "react-redux";
-import { logoutThunk } from "../../redux/auth/operations";
+import { logout } from "../../redux/auth/operations";
 import clsx from "clsx";
 
 const buildNavClass = ({ isActive }) =>
   clsx(css.navLink, { [css.active]: isActive });
 
-export const Header = () => {
+export const AppBar = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
@@ -56,10 +56,7 @@ export const Header = () => {
                 Contacts
               </NavLink>
             </li>
-            <button
-              onClick={() => dispatch(logoutThunk())}
-              className={css.button}
-            >
+            <button onClick={() => dispatch(logout())} className={css.button}>
               Logout
             </button>
           </>
@@ -68,4 +65,4 @@ export const Header = () => {
     </header>
   );
 };
-export default Header;
+export default AppBar;

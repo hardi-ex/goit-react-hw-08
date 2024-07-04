@@ -4,18 +4,14 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  margin-top: 20px;
   padding: 20px;
-
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form label {
   display: block;
   margin-bottom: 5px;
-  color: #333;
+  color: white;
 }
 
 .form input[type="text"] {
@@ -31,7 +27,7 @@
   cursor: pointer;
   border: none;
   border-radius: 5px;
-  background-color: rgb(26, 31, 69);
+  background-color: #634ea5;
   color: white;
   padding: 8px;
 

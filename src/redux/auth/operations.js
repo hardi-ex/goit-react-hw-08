@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { clearToken, goItApi, setToken } from "../../config/goItApi";
 
-export const registerThunk = createAsyncThunk(
+export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
@@ -14,7 +14,7 @@ export const registerThunk = createAsyncThunk(
   }
 );
 
-export const loginThunk = createAsyncThunk(
+export const login = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
     try {
@@ -27,14 +27,26 @@ export const loginThunk = createAsyncThunk(
   }
 );
 
-export const logoutThunk = createAsyncThunk(
-  "auth/logout",
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  try {
+    await goItApi.post("/users/logout");
+    clearToken();
+  } catch (error) {
+    thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const refreshUser = createAsyncThunk(
+  "auth/refresh",
   async (_, thunkAPI) => {
+    const savedToken = thunkAPI.getState().auth.token;
+    if (!savedToken) return thunkAPI.rejectWithValue("No token!");
     try {
-      await goItApi.post("/users/logout");
-      clearToken();
+      setToken(savedToken);
+      const { data } = await goItApi.get("/users/current");
+      return data;
     } catch (error) {
-      thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

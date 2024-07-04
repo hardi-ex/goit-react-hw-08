@@ -2,14 +2,14 @@ import { Field, Form, Formik } from "formik";
 import css from "./RegistrationForm.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { registerThunk } from "../../redux/auth/operations";
+import { register } from "../../redux/auth/operations";
 import arrow from "/arrow.svg";
 
 export const RegistrationForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    dispatch(registerThunk(values));
+    dispatch(register(values));
   };
 
   const initialValues = {
