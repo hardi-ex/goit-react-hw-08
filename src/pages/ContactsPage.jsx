@@ -34,7 +34,7 @@ export const ContactsPage = () => {
             visible={true}
             height="80"
             width="80"
-            color="#1A1F45"
+            color="#FFFFFF"
             radius="9"
             ariaLabel="three-dots-loading"
             wrapperStyle={{}}

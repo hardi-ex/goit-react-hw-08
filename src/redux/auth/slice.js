@@ -10,6 +10,7 @@ const initialState = {
   isLoggedIn: false,
   isLoading: false,
   isError: false,
+  isRefresh: false,
 };
 
 export const slice = createSlice({
@@ -32,9 +33,16 @@ export const slice = createSlice({
       .addCase(logout.fulfilled, () => {
         return initialState;
       })
+      .addCase(refreshUser.pending, (state) => {
+        state.isRefresh = true;
+      })
+      .addCase(refreshUser.rejected, (state) => {
+        state.isRefresh = false;
+      })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload;
         state.isLoggedIn = true;
+        state.isRefresh = false;
       });
   },
 });
