@@ -5,15 +5,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { showToast } from "../contacts/operations";
 
 const successAuthSound = new Howl({
-  src: ["/public/sounds/authError.mp3"],
+  src: ["/sounds/authError.mp3"],
 });
 
 const errorAuthSound = new Howl({
-  src: ["/public/sounds/authSuccess.mp3"],
+  src: ["/sounds/authSuccess.mp3"],
 });
 
 const logoutSound = new Howl({
-  src: ["/public/sounds/logout.mp3"],
+  src: ["/sounds/logout.mp3"],
 });
 
 const showErrorToast = (message) => {
